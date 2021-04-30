@@ -4,7 +4,11 @@
 
 
 Variables that need to be modified:
-- 
+- variables.tf
+-     line 9 =  Your username
+-     Line 15 = Your password
+-     Line 25 = Enter FMG FQDN (will be configured on the FGT)
+-     Line 110 = Copy and Paste your AWS Keypair name (EC2 --> Network & Security --> Key Pairs)
 
 
 ![image](https://user-images.githubusercontent.com/82145296/116725620-267d0d80-a9b0-11eb-8175-2e28086babd4.png)
