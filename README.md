@@ -1,38 +1,34 @@
-# Cloud_DataCenter_Enviroment_1
-- Cloud Data Center that builds FGT, FMG and an Apache Server in the US-East-1 Region (Virginia). FGT and FMG will be part of the public Subnet and the Apache server is protected by the FGT in the Private Subnet
-- Script will also create 4 DNS records to easily reach the resources created instead of using IPs 
+# DataCenter Enviroment 1
+Terraform Module that will create the AWS Networking Stack with FGT, FMG and an Apache Server and utilize AWS Route53 for DNS. 
+
+The module will create the below resources:
+
+- Networking Stack (VPC, Subnets, Route Tables, Security Groups and Internet Gateway) - Please refer to the diagram below. 
+- FortiGate with 2 interfaces (one in the Public and one in the Private subnets)
+- FortiManager in the public subnet
+- Ubunutu Server with Apache installed on it.  (username: user / password: fortinet123)
+- 2 x Route53 DNS Hosted Zones (one public and one Private)
 
 
-## Sections that need to be modified before you apply the code:
+// The DNS Hosted Zones must be sub-zones for a domain that is registered or managed by AWS Route53 //
 
-# variables.tf
--     line 9 =  Your username
--     Line 15 = Your password
--     Line 25 = Enter FMG FQDN (will be configured on the FGT)
--     Line 110 = Copy and Paste your AWS Keypair name (EC2 --> Network & Security --> Key Pairs)
+// i.e xyz.com is the domain name and you will create the subzone Lab1.xyz.com // 
+
+
+## There's 7 required variables that must be filled
+
+-     line 7 =  Your AWS IAM account Access Key
+-     Line 8 =  Your AWS IAM Account Secret Key
+
+-     Line 12 = Your username (1st initial / Last name)
+-     Line 13 = Copy and Paste your AWS Keypair name (EC2 --> Network & Security --> Key Pairs)
+-     Line 14 = TO DO: Change the password from "fortinet123" to your own password
+
+-     Line 18 = Your Public Hosted Zone in Route53 (This is a requirement that you have a public DNS zone either registered with Route53 or managed by it (i.e xyz.com)
+-     Line 19 = Your Sub Hosted Zone name for this lab (i.e lab.xyz.com)
+
     
 -----------------
 
-# terraform.tfvars
--     line 2 = Access Key
--     Line 3 = Secret Key
--     You can obtain your Access and Secret Keys from under (IAM --> Users) 
-    
------------------
 
-# Linux_VM.tf
--     lines 54-59 = Replace "admin" with your Username
--     Line 63 = Replace "password123" with your password and "admin" with your username
-    
------------------
-
-# DNS.tf
--     lines 2 = Enter your hosted zone name (follow the example in line 3)
-    
------------------
-
-# output.tf
--     lines 29 = Enter Ubunutu Web Server SSH 
-
-
-![image](https://user-images.githubusercontent.com/82145296/116725620-267d0d80-a9b0-11eb-8175-2e28086babd4.png)
+![image](https://user-images.githubusercontent.com/83562796/117002411-87a72880-acb1-11eb-911c-6f48d8bfaf74.png)
